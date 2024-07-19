@@ -8,6 +8,18 @@ const Node = (value) => {
 const LinkedList = () => {
     let head = null, size = 0;
 
+    const getHead = () => head;
+
+    const getSize = () => size;
+
+    const getTail = () => {
+        let currNode = head;
+        while (currNode.next) {
+            currNode = currNode.next;
+        }
+        return currNode;
+    }
+
     const append = (data) => {
         if (!size) {
             head = Node(data);
@@ -49,13 +61,18 @@ const LinkedList = () => {
 
     const pop = () => {
         let currNode = head;
+        if (currNode === null) {
+            return;
+        }
         if (currNode.next === null) {
             head = null;
+            size --;
         }
         while (currNode.next.next) {
             currNode = currNode.next;
         }
         currNode.next = null;
+        size --;
     }
 
     const find  = (data) => {
@@ -93,7 +110,7 @@ const LinkedList = () => {
         return ;
     }
 
-    return { head, append, prepend, at, pop, find, contains, toString }
+    return { getHead, getTail, getSize, append, prepend, at, pop, find, contains, toString }
 }
 
 const list = LinkedList();
